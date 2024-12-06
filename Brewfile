@@ -1,3 +1,4 @@
+brew "git"
 brew "bat"
 brew "eza"
 brew "fd"
