@@ -1,0 +1,11 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Brendan McDonald
+	email = hello.brendanm@gmail.com
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[push]
+	autoSetupRemote = true
