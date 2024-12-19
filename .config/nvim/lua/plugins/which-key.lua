@@ -1,6 +1,9 @@
 return {
   "folke/which-key.nvim",
   opts = {
-    preset = "classic",
+    triggers = {
+      { "<auto>", mode = "nixsotc" },
+      { "a", mode = { "n", "v" } },
+    },
   },
 }
