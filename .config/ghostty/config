@@ -1,0 +1,9 @@
+theme = light:rose-pine-dawn,dark:dracula
+font-size = 16
+font-family = dank mono
+window-padding-color = background
+macos-icon = custom-style
+macos-icon-frame = chrome
+macos-icon-ghost-color = #BD93F9
+macos-icon-screen-color = #6272A4
+window-new-tab-position = end

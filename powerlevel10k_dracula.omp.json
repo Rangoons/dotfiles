@@ -1,17 +1,35 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "palette": {
-    "background": "#282A36",
-    "comment": "#6272A4",
-    "current-line": "#44475A",
-    "cyan": "#8BE9FD",
-    "foreground": "#F8F8F2",
-    "green": "#50FA7B",
-    "orange": "#FFB86C",
-    "pink": "#FF79C6",
-    "purple": "#BD93F9",
-    "red": "#FF5555",
-    "yellow": "#F1FA8C"
+  "palettes": {
+    "template": "{{ if eq (env \"THEME_MODE\") \"dark\" }}dracula{{ else }}rosePineDawn{{ end }}",
+    "list": {
+      "dracula": {
+        "background": "#282A36",
+        "comment": "#6272A4",
+        "current-line": "#44475A",
+        "cyan": "#8BE9FD",
+        "foreground": "#F8F8F2",
+        "green": "#50FA7B",
+        "orange": "#FFB86C",
+        "pink": "#FF79C6",
+        "purple": "#BD93F9",
+        "red": "#FF5555",
+        "yellow": "#F1FA8C"
+      },
+      "rosePineDawn": {
+        "background": "#faf4ed",
+        "comment": "#fffaf3",
+        "current-line": "#f2e9e1",
+        "cyan": "#56949f",
+        "foreground": "#575279",
+        "green": "#286983",
+        "orange": "#ea9d34",
+        "pink": "#d7827e",
+        "purple": "#907aa9",
+        "red": "#b4637a",
+        "yellow": "#dfdad9"
+      }
+    }
   },
   "terminal_background": "p:background",
   "blocks": [

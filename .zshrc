@@ -20,6 +20,15 @@ alias cd="z"
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --icons=always"
 
+function update_theme_mode() {
+  if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
+    export THEME_MODE="dark"
+  else
+    export THEME_MODE="light"
+  fi
+}
+
+precmd_functions+=(update_theme_mode)
 # --- Oh My Posh ---
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config /Users/brendanmcdonald/powerlevel10k_dracula.omp.json)"
