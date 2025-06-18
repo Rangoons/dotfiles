@@ -19,7 +19,8 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --icons=always"
-
+# ---- Mise version manager -----
+eval "$(~/.local/bin/mise activate)"
 function update_theme_mode() {
   if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
     export THEME_MODE="dark"
@@ -31,7 +32,7 @@ function update_theme_mode() {
 precmd_functions+=(update_theme_mode)
 # --- Oh My Posh ---
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config /Users/brendanmcdonald/powerlevel10k_dracula.omp.json)"
+  eval "$(oh-my-posh init zsh --config /Users/brendanmcdonald/rosepine.omp.json)"
 fi
 
 # bun completions
@@ -39,6 +40,9 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ----- thefuck alias -----
+eval $(thefuck --alias)
+eval $(thefuck --alias fk)
 # ----- Bat (better cat) -----
 export BAT_THEME=Dracula
 # -- Use fd instead of fzf --
@@ -87,3 +91,29 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --scrollbar="│"'
   eval "$(fzf --zsh)"
   source ~/fzf-git.sh/fzf-git.sh
+  ## ascii
+# echo "    .__________________________."
+# echo "    | .___________________. |==|"
+# echo "    | | ................. | |  |"
+# echo "    | | ::::Apple ][::::: | |  |"
+# echo "    | | ::::::::::::::::: | |  |"
+# echo "    | | ::::::::::::::::: | |  |"
+# echo "    | | ::::::::::::::::: | |  |"
+# echo "    | | ::::::::::::::::: | |  |"
+# echo "    | | ::::::::::::::::: | | ,|"
+# echo "    | !___________________! |(c|"
+# echo "    !_______________________!__!"
+# echo "   /                            \\"
+# echo "  /  [][][][][][][][][][][][][]  \\"
+# echo " /  [][][][][][][][][][][][][][]  \\"
+# echo "(  [][][][][____________][][][][]  )"
+# echo " \\ ------------------------------ /"
+# echo "  \\______________________________/"
+
+# pnpm
+export PNPM_HOME="/Users/brendanmcdonald/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
