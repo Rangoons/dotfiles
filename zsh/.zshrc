@@ -28,11 +28,10 @@ function update_theme_mode() {
     export THEME_MODE="light"
   fi
 }
-
 precmd_functions+=(update_theme_mode)
 # --- Oh My Posh ---
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config /Users/brendanmcdonald/rosepine.omp.json)"
+  eval "$(oh-my-posh init zsh --config ~/rosepine.omp.json)"
 fi
 
 # bun completions

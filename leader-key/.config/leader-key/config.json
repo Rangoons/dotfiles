@@ -1,0 +1,244 @@
+{
+  "actions" : [
+    {
+      "key" : "t",
+      "type" : "application",
+      "value" : "/Applications/Ghostty.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "b",
+          "type" : "application",
+          "value" : "/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app"
+        },
+        {
+          "key" : "e",
+          "type" : "application",
+          "value" : "/Applications/Proton Mail.app"
+        },
+        {
+          "key" : "i",
+          "type" : "application",
+          "value" : "/System/Applications/Music.app"
+        },
+        {
+          "key" : "m",
+          "type" : "application",
+          "value" : "/System/Applications/Messages.app"
+        }
+      ],
+      "key" : "o",
+      "label" : "Open",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "e",
+          "label" : "Emoji",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
+        },
+        {
+          "key" : "p",
+          "label" : "Confetti",
+          "type" : "url",
+          "value" : "raycast://confetti"
+        }
+      ],
+      "key" : "r",
+      "label" : "raycast",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "5",
+          "label" : "Capture All-in-One",
+          "type" : "url",
+          "value" : "cleanshot://all-in-one"
+        },
+        {
+          "actions" : [
+            {
+              "key" : "c",
+              "label" : "capture window",
+              "type" : "url",
+              "value" : "cleanshot://capture-window"
+            },
+            {
+              "key" : "s",
+              "label" : "capture window and save",
+              "type" : "url",
+              "value" : "cleanshot://capture-window?action=save"
+            },
+            {
+              "key" : "t",
+              "label" : "capture window and annotate",
+              "type" : "url",
+              "value" : "cleanshot://capture-window?action=annotate"
+            },
+            {
+              "key" : "k",
+              "label" : "capture window and copy",
+              "type" : "url",
+              "value" : "cleanshot://capture-window?action=copy"
+            }
+          ],
+          "key" : "w",
+          "label" : "Capture Window",
+          "type" : "group"
+        },
+        {
+          "actions" : [
+            {
+              "key" : "c",
+              "label" : "capture area",
+              "type" : "url",
+              "value" : "cleanshot://capture-area"
+            },
+            {
+              "key" : "s",
+              "label" : "capture area and save",
+              "type" : "url",
+              "value" : "cleanshot://capture-area?action=save"
+            },
+            {
+              "key" : "t",
+              "label" : "capture area and annotate",
+              "type" : "url",
+              "value" : "cleanshot://capture-area?action=annotate"
+            },
+            {
+              "key" : "k",
+              "label" : "capture area and copy",
+              "type" : "url",
+              "value" : "cleanshot://capture-area?action=copy"
+            }
+          ],
+          "key" : "c",
+          "label" : "Capture Area",
+          "type" : "group"
+        },
+        {
+          "actions" : [
+            {
+              "key" : "c",
+              "label" : "capture text",
+              "type" : "url",
+              "value" : "cleanshot://capture-text"
+            },
+            {
+              "key" : "n",
+              "label" : "capture text (no linebreaks)",
+              "type" : "url",
+              "value" : "cleanshot://capture-text?linebreaks=false"
+            }
+          ],
+          "key" : "x",
+          "label" : "Capture Text",
+          "type" : "group"
+        },
+        {
+          "key" : "h",
+          "label" : "open history",
+          "type" : "url",
+          "value" : "cleanshot://open-history"
+        }
+      ],
+      "key" : "s",
+      "label" : "clean shot x",
+      "type" : "group"
+    },
+    {
+      "key" : " ",
+      "type" : "application",
+      "value" : "/Applications/Raycast.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "t",
+          "label" : "Toggle Appearance",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/system/toggle-system-appearance"
+        },
+        {
+          "key" : "q",
+          "label" : "Lock Screen",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/system/lock-screen"
+        },
+        {
+          "key" : "s",
+          "type" : "application",
+          "value" : "/System/Applications/System Settings.app"
+        },
+        {
+          "key" : "a",
+          "type" : "command",
+          "value" : "open x-apple.systempreferences:com.apple.Appearance-Settings.extension"
+        },
+        {
+          "key" : "p",
+          "type" : "application",
+          "value" : "/System/Applications/Passwords.app"
+        }
+      ],
+      "key" : "a",
+      "label" : "Apple",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "1",
+          "label" : "top left",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/top-left-quarter"
+        },
+        {
+          "key" : "2",
+          "label" : "top right",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/top-right-quarter"
+        },
+        {
+          "key" : "3",
+          "label" : "bottom left",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/bottom-left-quarter"
+        },
+        {
+          "key" : "4",
+          "label" : "bottom right",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/bottom-right-quarter"
+        },
+        {
+          "key" : "l",
+          "label" : "left",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/left-half"
+        },
+        {
+          "key" : "r",
+          "label" : "right",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/right-half"
+        },
+        {
+          "key" : "m",
+          "label" : "max",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/maximize"
+        }
+      ],
+      "key" : "w",
+      "label" : "window",
+      "type" : "group"
+    }
+  ],
+  "type" : "group"
+}
