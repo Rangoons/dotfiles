@@ -15,7 +15,7 @@
         {
           "key" : "e",
           "type" : "application",
-          "value" : "/Applications/Proton Mail.app"
+          "value" : "/Applications/Notion Mail.app"
         },
         {
           "key" : "i",
@@ -147,7 +147,7 @@
           "value" : "cleanshot://open-history"
         }
       ],
-      "key" : "s",
+      "key" : "x",
       "label" : "clean shot x",
       "type" : "group"
     },
@@ -238,6 +238,21 @@
       "key" : "w",
       "label" : "window",
       "type" : "group"
+    },
+    {
+      "key" : "n",
+      "type" : "application",
+      "value" : "/Applications/Notion.app"
+    },
+    {
+      "key" : "s",
+      "type" : "application",
+      "value" : "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+    },
+    {
+      "key" : "l",
+      "type" : "application",
+      "value" : "/Applications/Linear.app"
     }
   ],
   "type" : "group"

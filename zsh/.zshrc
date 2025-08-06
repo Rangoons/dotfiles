@@ -1,6 +1,10 @@
-#
+# --- Oh My Posh ---
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ~/rosepine.omp.json)"
+fi
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 # history setup
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
@@ -19,8 +23,8 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --icons=always"
-# ---- Mise version manager -----
-eval "$(~/.local/bin/mise activate)"
+# # ---- Mise version manager -----
+# eval "$(~/.local/bin/mise activate)"
 function update_theme_mode() {
   if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
     export THEME_MODE="dark"
@@ -29,20 +33,14 @@ function update_theme_mode() {
   fi
 }
 precmd_functions+=(update_theme_mode)
-# --- Oh My Posh ---
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/rosepine.omp.json)"
-fi
 
 # bun completions
-[ -s "/Users/brendanmcdonald/.bun/_bun" ] && source "/Users/brendanmcdonald/.bun/_bun"
+[ -s "/Users/brendan.mcdonald/.bun/_bun" ] && source "/Users/brendan.mcdonald/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# ----- thefuck alias -----
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
 # ----- Bat (better cat) -----
+alias cat="bat --theme auto:system --theme-dark default --theme-light rose-pine"
 export BAT_THEME=Dracula
 # -- Use fd instead of fzf --
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
@@ -80,39 +78,30 @@ _fzf_comprun() {
   esac
 }
 # ---- FZF theme ----
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#f8f8f2,fg+:#f8f8f2,bg:#282a36,bg+:#44475a
-  --color=hl:#bd93f9,hl+:#bd93f9,info:#ffb86c,marker:#ff79c6
-  --color=prompt:#50fa7b,spinner:#ffb86c,pointer:#ff79c6,header:#6272a4
-  --color=border:#262626,label:#aeaeae,query:#d9d9d9
-  --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-  --prompt="> " --marker=">" --pointer="👉" --separator="─"
-  --scrollbar="│"'
+export FZF_DEFAULT_OPTS="
+	--color=fg:#797593,bg:#faf4ed,hl:#d7827e
+	--color=fg+:#575279,bg+:#f2e9e1,hl+:#d7827e
+	--color=border:#dfdad9,header:#286983,gutter:#faf4ed
+	--color=spinner:#ea9d34,info:#56949f
+	--color=pointer:#907aa9,marker:#b4637a,prompt:#797593"
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#   --color=fg:#f8f8f2,fg+:#f8f8f2,bg:#282a36,bg+:#44475a
+#   --color=hl:#bd93f9,hl+:#bd93f9,info:#ffb86c,marker:#ff79c6
+#   --color=prompt:#50fa7b,spinner:#ffb86c,pointer:#ff79c6,header:#6272a4
+#   --color=border:#262626,label:#aeaeae,query:#d9d9d9
+#   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
+#   --prompt="> " --marker=">" --pointer="👉" --separator="─"
+#   --scrollbar="│"'
   eval "$(fzf --zsh)"
   source ~/fzf-git.sh/fzf-git.sh
-  ## ascii
-# echo "    .__________________________."
-# echo "    | .___________________. |==|"
-# echo "    | | ................. | |  |"
-# echo "    | | ::::Apple ][::::: | |  |"
-# echo "    | | ::::::::::::::::: | |  |"
-# echo "    | | ::::::::::::::::: | |  |"
-# echo "    | | ::::::::::::::::: | |  |"
-# echo "    | | ::::::::::::::::: | |  |"
-# echo "    | | ::::::::::::::::: | | ,|"
-# echo "    | !___________________! |(c|"
-# echo "    !_______________________!__!"
-# echo "   /                            \\"
-# echo "  /  [][][][][][][][][][][][][]  \\"
-# echo " /  [][][][][][][][][][][][][][]  \\"
-# echo "(  [][][][][____________][][][][]  )"
-# echo " \\ ------------------------------ /"
-# echo "  \\______________________________/"
-
 # pnpm
-export PNPM_HOME="/Users/brendanmcdonald/Library/pnpm"
+export PNPM_HOME="/Users/brendan.mcdonald/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator 
+export PATH=$PATH:$ANDROID_HOME/platform-tools
