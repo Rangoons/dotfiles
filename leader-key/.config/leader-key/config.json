@@ -253,6 +253,11 @@
       "key" : "l",
       "type" : "application",
       "value" : "/Applications/Linear.app"
+    },
+    {
+      "key" : "f",
+      "type" : "application",
+      "value" : "/Applications/Figma.app"
     }
   ],
   "type" : "group"

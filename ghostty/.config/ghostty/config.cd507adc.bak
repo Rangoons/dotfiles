@@ -1,4 +1,4 @@
-theme = Catppuccin Frappe
+theme = catppuccin-frappe
 font-size = 18
 font-family = dank mono
 window-padding-color = background
@@ -24,4 +24,3 @@ window-padding-balance = true
 window-padding-x = 8
 window-padding-y = 4
 window-theme = auto
-keybind = shift+enter=text:\x1b\r

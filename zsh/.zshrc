@@ -1,30 +1,41 @@
-# --- Oh My Posh ---
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/rosepine.omp.json)"
-fi
+# Lazy load nvm for faster shell startup
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+nvm() {
+  unset -f nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+node() {
+  unset -f node
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  node "$@"
+}
+npm() {
+  unset -f npm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  npm "$@"
+}
+npx() {
+  unset -f npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  npx "$@"
+}
 # history setup
 HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history
-setopt hist_expire_dups_first
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
 setopt hist_ignore_dups
-setopt hist_verify
+setopt hist_find_no_dups
 # completion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-alias cd="z"
-# ---- Eza (better ls) -----
-alias ls="eza --color=always --icons=always"
-# # ---- Mise version manager -----
-# eval "$(~/.local/bin/mise activate)"
+alias ls="ls  -A -F -G"
 function update_theme_mode() {
   if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
     export THEME_MODE="dark"
@@ -33,75 +44,33 @@ function update_theme_mode() {
   fi
 }
 precmd_functions+=(update_theme_mode)
-
+# --- Oh My Posh ---
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ~/rosepine.omp.json)"
+fi
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 # bun completions
-[ -s "/Users/brendan.mcdonald/.bun/_bun" ] && source "/Users/brendan.mcdonald/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# [ -s "/Users/brendan.mcdonald/.bun/_bun" ] && source "/Users/brendan.mcdonald/.bun/_bun"
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
 
-# ----- Bat (better cat) -----
-alias cat="bat --theme auto:system --theme-dark default --theme-light rose-pine"
-export BAT_THEME=Dracula
-# -- Use fd instead of fzf --
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-
-# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --exclude .git . "$1"
-}
-
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type=d --hidden --exclude .git . "$1"
-}
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
-
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments to fzf.
-_fzf_comprun() {
-  local command=$1
-  shift
-
-  case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
-  esac
-}
-# ---- FZF theme ----
-export FZF_DEFAULT_OPTS="
-	--color=fg:#797593,bg:#faf4ed,hl:#d7827e
-	--color=fg+:#575279,bg+:#f2e9e1,hl+:#d7827e
-	--color=border:#dfdad9,header:#286983,gutter:#faf4ed
-	--color=spinner:#ea9d34,info:#56949f
-	--color=pointer:#907aa9,marker:#b4637a,prompt:#797593"
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-#   --color=fg:#f8f8f2,fg+:#f8f8f2,bg:#282a36,bg+:#44475a
-#   --color=hl:#bd93f9,hl+:#bd93f9,info:#ffb86c,marker:#ff79c6
-#   --color=prompt:#50fa7b,spinner:#ffb86c,pointer:#ff79c6,header:#6272a4
-#   --color=border:#262626,label:#aeaeae,query:#d9d9d9
-#   --border="rounded" --border-label="fzf" --border-label-pos="0" --preview-window="border-rounded"
-#   --prompt="> " --marker=">" --pointer="👉" --separator="─"
-#   --scrollbar="│"'
-  eval "$(fzf --zsh)"
-  source ~/fzf-git.sh/fzf-git.sh
-# pnpm
-export PNPM_HOME="/Users/brendan.mcdonald/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator 
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+BREW_PREFIX="/opt/homebrew"
+export LIBRARY_PATH="$BREW_PREFIX/lib:$LIBRARY_PATH"
+export C_INCLUDE_PATH="$BREW_PREFIX/include:$C_INCLUDE_PATH"
+# Teleport
+alias klogin="tsh logout; tsh login --proxy=prizepicks.teleport.sh --auth=jc"
+alias klogout="tsh logout"
+alias kdev="tsh kube login dev01-gcpdev-us-east4"
+alias kstage="tsh kube login staging01-gcpstg-us-east4"
+alias kterm="kubectl exec --stdin --tty prizepicks-rails-utility-0 -n rails-api -c prizepicks-rails-utility -- /bin/bash"
+alias pp:nuke:packages="find packages -path 'packages/eslint-plugin-custom-rules' -prune -o -type d -name dist -exec rm -rf {} + && find packages -type d -name node_modules -exec rm -rf {} +"
+# opencode
+export PATH=/Users/brendan.mcdonald/.opencode/bin:$PATH
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

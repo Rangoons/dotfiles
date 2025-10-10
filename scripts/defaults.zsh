@@ -14,7 +14,7 @@ defaults write com.apple.dock mineffect -string "scale"
 defaults write com.apple.dock showhidden -bool true
 
 # Move windows by dragging any part of the window
-defaults write -g NSWindowShouldDragOnGesture -bool true
+defaults write -g NSWindowShouldDragOnGesture -bool false
 
 # Keyboard
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
