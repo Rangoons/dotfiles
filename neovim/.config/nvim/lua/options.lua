@@ -2,12 +2,19 @@
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
-
--- Make line numbers default
-vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.opt.winborder = 'rounded'
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.showtabline = 2
+vim.opt.signcolumn = 'yes'
+vim.opt.wrap = false
+vim.opt.cursorcolumn = false
+vim.opt.ignorecase = true
+vim.opt.smartindent = true
+vim.opt.termguicolors = true
+vim.opt.undofile = true
+vim.opt.number = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -25,13 +32,6 @@ end)
 
 -- Enable break indent
 vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
 
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
@@ -61,7 +61,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.o.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.o.cursorline = true
+-- vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10

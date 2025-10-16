@@ -9,6 +9,8 @@ return {
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
+      require('mini.sessions').setup()
+      require('mini.starter').setup()
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
@@ -16,6 +18,18 @@ return {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+      require('mini.pairs').setup {
+        modes = { insert = true, command = true, terminal = false },
+        -- skip autopair when next character is one of these
+        skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+        -- skip autopair when the cursor is inside these treesitter nodes
+        skip_ts = { 'string' },
+        -- skip autopair when next character is closing pair
+        -- and there are more closing pairs than opening pairs
+        skip_unbalanced = true,
+        -- better deal with markdown code blocks
+        markdown = true,
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
