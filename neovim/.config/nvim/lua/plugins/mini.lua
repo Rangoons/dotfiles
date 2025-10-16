@@ -11,7 +11,19 @@ return {
       require('mini.ai').setup { n_lines = 500 }
       require('mini.sessions').setup()
       require('mini.starter').setup()
-
+      require('mini.files').setup {
+        windows = {
+          preview = false,
+          max_number = 2,
+          width_focus = 30,
+          width_nofocus = 30,
+        },
+      }
+      vim.keymap.set('n', '-', function()
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+        require('mini.files').open(path)
+      end, { desc = 'Open file explorer' })
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren

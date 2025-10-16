@@ -5,11 +5,9 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
       bigfile = { enabled = true },
       indent = { enabled = true },
+      bufdefele = { enabled = true },
       picker = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
@@ -88,6 +86,20 @@ return {
           Snacks.picker.search_history()
         end,
         desc = 'Search History',
+      },
+      {
+        '<leader>bd',
+        function()
+          Snacks.bufdelete.delete()
+        end,
+        desc = 'Delete current buffer',
+      },
+      {
+        '<leader>bo',
+        function()
+          Snacks.bufdelete.other()
+        end,
+        desc = 'Delete other buffers',
       },
     },
   },
