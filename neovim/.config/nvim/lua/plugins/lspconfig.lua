@@ -81,7 +81,7 @@ return {
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
           -- Find references for the word under your cursor.
           map('grr', function()
-            Snacks.picker().lsp_references()
+            Snacks.picker.lsp_references()
           end, '[G]oto [R]eferences')
           --
           -- -- Jump to the implementation of the word under your cursor.
