@@ -8,4 +8,10 @@ return {
       vim.diagnostic.config { virtual_text = false } -- Disable default virtual text
     end,
   },
+  {
+    'dmmulroy/ts-error-translator.nvim',
+    config = function()
+      require('ts-error-translator').setup()
+    end,
+  },
 }
