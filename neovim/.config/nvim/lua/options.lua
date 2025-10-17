@@ -30,6 +30,7 @@ vim.o.list           = true       -- Show helpful text indicators
 vim.o.number         = true       -- Show line numbers
 vim.o.relativenumber = true
 vim.o.pumheight      = 10         -- Make popup menu smaller
+vim.o.pumblend       = 10
 vim.o.ruler          = false      -- Don't show cursor coordinates
 vim.o.shortmess      = 'CFOSWaco' -- Disable some built-in completion messages
 vim.o.showmode       = false      -- Don't show mode in command line
@@ -48,6 +49,9 @@ vim.o.foldlevel   = 10       -- Fold nothing by default; set to 0 or 1 to fold
 vim.o.foldmethod  = 'indent' -- Fold based on indent level
 vim.o.foldnestmax = 10       -- Limit number of fold levels
 vim.o.foldtext    = ''       -- Show text under fold with its highlighting
+-- Built-in completion
+vim.o.complete    = '.,w,b,kspell'                  -- Use less sources
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Use custom behavior
 
 
 -- Minimal number of screen lines to keep above and below the cursor
@@ -65,7 +69,7 @@ vim.opt.termguicolors = true
 vim.o.timeoutlen = 300
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 200 -- faster completion & diagnostics
 -- Autocommands ===============================================================
 
 -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'.
