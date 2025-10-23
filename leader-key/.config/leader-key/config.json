@@ -152,7 +152,7 @@
       "type" : "group"
     },
     {
-      "key" : " ",
+      "key" : "space",
       "type" : "application",
       "value" : "/Applications/Raycast.app"
     },

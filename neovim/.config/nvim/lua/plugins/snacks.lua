@@ -25,6 +25,13 @@ return {
         desc = 'Smart Find Files',
       },
       {
+        '<leader>sf',
+        function()
+          Snacks.picker.files { cwd = vim.fn.getcwd() }
+        end,
+        desc = 'Find files, (cwd)',
+      },
+      {
         '<leader>sb',
         function()
           Snacks.picker.buffers()

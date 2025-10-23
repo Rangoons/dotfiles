@@ -11,6 +11,7 @@ return {
         javascriptreact = { 'eslint_d' },
         typescript = { 'eslint_d' },
         typescriptreact = { 'eslint_d' },
+        go = { 'golangcilint' },
       }
       -- Create autocommand which carries out the actual linting
       -- on the specified events.

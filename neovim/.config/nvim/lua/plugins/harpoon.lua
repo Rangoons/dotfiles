@@ -13,7 +13,7 @@ return {
         harpoon:list():add()
       end, 'Harpoon file')
       nmap('<C-e>', function()
-        harpoon.ui:toggler_quick_menu(harpoon:list())
+        harpoon.ui:toggle_quick_menu(harpoon:list())
       end, 'Harpoon Quick Menu')
       for i = 1, 4 do
         nmap('<leader>' .. i, function()
