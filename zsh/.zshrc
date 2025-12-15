@@ -65,13 +65,20 @@ export C_INCLUDE_PATH="$BREW_PREFIX/include:$C_INCLUDE_PATH"
 # Teleport
 alias klogin="tsh logout; tsh login --proxy=prizepicks.teleport.sh --auth=jc"
 alias klogout="tsh logout"
-alias kdev="tsh kube login dev01-gcpdev-us-east4"
+alias kdev="tsh kube login us-central1-universe-development-gw2rk-universe"
 alias kls='tsh kube ls'
 alias kstage="tsh kube login staging01-gcpstg-us-east4"
 alias kterm="kubectl exec --stdin --tty prizepicks-rails-utility-0 -n rails-api -c prizepicks-rails-utility -- /bin/bash"
 alias pp:nuke:packages="find packages -path 'packages/eslint-plugin-custom-rules' -prune -o -type d -name dist -exec rm -rf {} + && find packages -type d -name node_modules -exec rm -rf {} +"
 # opencode
 export PATH=/Users/brendan.mcdonald/.opencode/bin:$PATH
+## nvim alias
+# alias nvim="nvm use 22 && nvim"
+alias nivm="nvim"
+alias vim="nvim"
+# Go binaries
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

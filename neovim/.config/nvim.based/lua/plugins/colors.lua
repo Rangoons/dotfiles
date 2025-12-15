@@ -1,16 +1,16 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
   },
   {
-    "rose-pine/neovim",
+    'rose-pine/neovim',
     lazy = false,
     priority = 1000,
   },
   {
-    "rebelot/kanagawa.nvim",
+    'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
     opts = {
@@ -18,18 +18,11 @@ return {
         theme = {
           all = {
             ui = {
-              bg_gutter = "none",
+              bg_gutter = 'none',
             },
           },
         },
       },
-    },
-  },
-
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "kanagawa",
     },
   },
 }

@@ -1,24 +1,28 @@
 local function nmap(key, action, description)
-  vim.keymap.set('n', key, action, { desc = description })
+  vim.keymap.set("n", key, action, { desc = description })
 end
 return {
   {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local harpoon = require 'harpoon'
-      harpoon:setup()
-      nmap('<leader>a', function()
+      local harpoon = require("harpoon")
+      harpoon:setup({
+        settings = {
+          save_on_toggle = true,
+        },
+      })
+      nmap("<leader>A", function()
         harpoon:list():add()
-      end, 'Harpoon file')
-      nmap('<C-e>', function()
+      end, "Harpoon file")
+      nmap("<C-e>", function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
-      end, 'Harpoon Quick Menu')
+      end, "Harpoon Quick Menu")
       for i = 1, 4 do
-        nmap('<leader>' .. i, function()
+        nmap("<leader>" .. i, function()
           harpoon:list():select(i)
-        end, 'Harpoon to file ' .. i)
+        end, "Harpoon to file " .. i)
       end
     end,
   },
