@@ -73,7 +73,6 @@ alias pp:nuke:packages="find packages -path 'packages/eslint-plugin-custom-rules
 # opencode
 export PATH=/Users/brendan.mcdonald/.opencode/bin:$PATH
 ## nvim alias
-# alias nvim="nvm use 22 && nvim"
 alias nivm="nvim"
 alias vim="nvim"
 # Go binaries
