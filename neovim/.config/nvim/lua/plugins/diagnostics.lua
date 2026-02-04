@@ -19,7 +19,7 @@ return {
           factor = 0.08, -- Transparency factor (0.0 = transparent, 1.0 = opaque)
         },
       })
-      -- vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+      vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
     end,
   },
   {

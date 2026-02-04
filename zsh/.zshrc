@@ -81,3 +81,8 @@ export PATH=$GOPATH/bin:$PATH
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Source secrets file if it exists
+[ -f ~/.config/zsh/.zshrc.secrets ] && source ~/.config/zsh/.zshrc.secrets
+
+export PATH="$HOME/.local/bin:$PATH"
