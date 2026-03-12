@@ -66,6 +66,7 @@ export C_INCLUDE_PATH="$BREW_PREFIX/include:$C_INCLUDE_PATH"
 alias klogin="tsh logout; tsh login --proxy=prizepicks.teleport.sh --auth=jc"
 alias klogout="tsh logout"
 alias kdev="tsh kube login us-central1-universe-development-gw2rk-universe"
+alias kprod="tsh kube login us-east4-universe-prod01-ksfhn-universe"
 alias kls='tsh kube ls'
 alias kstage="tsh kube login staging01-gcpstg-us-east4"
 alias kterm="kubectl exec --stdin --tty prizepicks-rails-utility-0 -n rails-api -c prizepicks-rails-utility -- /bin/bash"

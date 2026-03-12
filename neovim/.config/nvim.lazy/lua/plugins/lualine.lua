@@ -8,30 +8,6 @@ local function format_branch(str)
   return short or str
 end
 
--- Helper function: weather with caching
-local weather_cache = { temp = "", last_update = 0 }
-local CACHE_DURATION = 3600 -- 1 hour
-
-local function fetch_weather()
-  local current_time = os.time()
-
-  if current_time - weather_cache.last_update < CACHE_DURATION then
-    return weather_cache.temp
-  end
-
-  vim.fn.jobstart('curl -s "wttr.in/Thompson,PA?u&format=%c+%t"', {
-    stdout_buffered = true,
-    on_stdout = function(_, data)
-      if data and data[1] and data[1] ~= "" then
-        weather_cache.temp = vim.trim(data[1])
-        weather_cache.last_update = current_time
-      end
-    end,
-  })
-
-  return weather_cache.temp ~= "" and weather_cache.temp or "..."
-end
-
 -- Plugin spec
 return {
   {
@@ -70,8 +46,6 @@ return {
       -- Clear position indicators
       opts.sections.lualine_y = {}
 
-      -- Replace clock with weather
-      opts.sections.lualine_z = { { fetch_weather, icon = "" } }
 
       return opts
     end,

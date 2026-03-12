@@ -1,6 +1,10 @@
 theme = Kanagawa Wave
 font-size = 18
 font-family = dank mono
+font-family = "IosevkaTerm Nerd Font Mono"
+font-feature = -calt
+font-feature = -dlig
+font-feature = -liga
 window-padding-color = background
 macos-icon = chalkboard
 window-new-tab-position = end
