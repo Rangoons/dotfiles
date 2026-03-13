@@ -1,5 +1,6 @@
 # Lazy load nvm for faster shell startup
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+export PATH="$(find "$NVM_DIR/versions/node" -maxdepth 1 -name "v$(cat "$NVM_DIR/alias/default")*" | sort -V | tail -1)/bin:$PATH"
 nvm() {
   unset -f nvm
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
