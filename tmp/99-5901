@@ -1,0 +1,14 @@
+This function is a wrapper that overrides Neovim's built-in LSP floating window function.
+
+**What it does:**
+- Captures the original `vim.lsp.util.open_floating_preview` function before overriding it
+- Creates a new version that automatically adds rounded borders to LSP floating windows
+- If `opts` is not provided, it initializes it as an empty table
+- If `opts.border` is not set, it defaults to "rounded"
+- Then calls the original function with the modified options
+
+**Why it exists:**
+This pattern (called "monkey patching" or function wrapping) customizes the appearance of LSP hover documentation, signature help, and diagnostic floating windows throughout Neovim without needing to configure each LSP feature individually. It ensures all LSP floating windows have consistent rounded borders instead of the default sharp corners.
+
+**The `do...end` block:**
+The outer `do...end` block creates a local scope so that `orig` doesn't pollute the global namespace—it's only accessible within this override.

@@ -39,7 +39,7 @@ now(function()
 end)
 
 now(function()
-	local linear_output = "hello"
+	local linear_output = ""
 	local starter = require("mini.starter")
 	local footer_fn = function()
 		return linear_output
@@ -136,28 +136,46 @@ now_if_args(function()
 	later(function()
 		local ai = require("mini.ai")
 		ai.setup({
+			n_lines = 500,
 			custom_textobjects = {
-				-- Make `aB` / `iB` act on around/inside whole *b*uffer
-				B = MiniExtra.gen_ai_spec.buffer(),
-				-- For more complicated textobjects that require structural awareness,
-				-- use tree-sitter. This example makes `aF`/`iF` mean around/inside function
-				-- definition (not call). See `:h MiniAi.gen_spec.treesitter()` for details.
-				F = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+				o = ai.gen_spec.treesitter({ -- code block
+					a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+					i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+				}),
+				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+				t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+				d = { "%f[%d]%d+" }, -- digits
+				e = { -- Word with case
+					{ "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+					"^().*()$",
+				},
+				g = MiniExtra.gen_ai_spec.buffer(), -- buffer
+				u = ai.gen_spec.function_call(), -- u for "Usage"
+				U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
 			},
-
-			-- 'mini.ai' by default mostly mimics built-in search behavior: first try
-			-- to find textobject covering cursor, then try to find to the right.
-			-- Although this works in most cases, some are confusing. It is more robust to
-			-- always try to search only covering textobject and explicitly ask to search
-			-- for next (`an`/`in`) or last (`al`/`il`).
-			-- Try this. If you don't like it - delete next line and this comment.
-			search_method = "cover",
+			-- custom_textobjects = {
+			-- 	-- Make `aB` / `iB` act on around/inside whole *b*uffer
+			-- 	B = MiniExtra.gen_ai_spec.buffer(),
+			-- 	-- For more complicated textobjects that require structural awareness,
+			-- 	-- use tree-sitter. This example makes `aF`/`iF` mean around/inside function
+			-- 	-- definition (not call). See `:h MiniAi.gen_spec.treesitter()` for details.
+			-- 	F = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+			-- },
+			--
+			-- -- 'mini.ai' by default mostly mimics built-in search behavior: first try
+			-- -- to find textobject covering cursor, then try to find to the right.
+			-- -- Although this works in most cases, some are confusing. It is more robust to
+			-- -- always try to search only covering textobject and explicitly ask to search
+			-- -- for next (`an`/`in`) or last (`al`/`il`).
+			-- -- Try this. If you don't like it - delete next line and this comment.
+			-- search_method = "cover",
 		})
 	end)
 end)
 now_if_args(function()
 	require("mini.misc").setup()
-	MiniMisc.setup_auto_root()
+	-- MiniMisc.setup_auto_root()
 	MiniMisc.setup_restore_cursor()
 	MiniMisc.setup_termbg_sync()
 end)
@@ -179,6 +197,20 @@ later(function()
 			prompt_caret = "🫷",
 			prompt_prefix = "😈",
 		},
+	})
+end)
+later(function()
+	require("mini.pairs").setup({
+		modes = { insert = true, command = true, terminal = false },
+		-- skip autopair when next character is one of these
+		skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+		-- skip autopair when the cursor is inside these treesitter nodes
+		skip_ts = { "string" },
+		-- skip autopair when next character is closing pair
+		-- and there are more closing pairs than opening pairs
+		skip_unbalanced = true,
+		-- better deal with markdown code blocks
+		markdown = true,
 	})
 end)
 

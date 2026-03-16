@@ -1,22 +1,19 @@
+<Context>
+You receive a selection in neovim that you need to replace with new code.
+The selection's contents may contain notes, incorporate the notes every time if there are some.
+consider the context of the selection and what you are suppose to be implementing
+<SELECTION_LOCATION>
+range(point(152,1),point(152,74))
+</SELECTION_LOCATION>
+<SELECTION_CONTENT>
+	function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+</SELECTION_CONTENT>
+<FILE_CONTAINING_SELECTION>
 local now, now_if_args, later, on_packchanged = Config.now, Config.now_if_args, Config.later, Config.on_packchanged
 local add = vim.pack.add
 now(function()
-	add({ "https://github.com/savq/melange-nvim", "https://github.com/rose-pine/neovim" })
+	add({ "https://github.com/savq/melange-nvim" })
 	vim.cmd("colorscheme melange")
-end)
-now(function()
-	add({ "https://github.com/rebelot/kanagawa.nvim", "https://github.com/yorickpeterse/vim-paper" })
-	require("kanagawa").setup({
-		colors = {
-			theme = {
-				all = {
-					ui = {
-						bg_gutter = "none",
-					},
-				},
-			},
-		},
-	})
 end)
 now_if_args(function()
 	local ts_update = function()
@@ -250,53 +247,13 @@ vim.lsp.config("ts_ls", {})
 vim.lsp.config("gopls", {})
 vim.lsp.config("eslint", {})
 later(function()
-	local mini_layout = {
-		preview = "main",
-		layout = {
-			backdrop = false,
-			border = "single",
-			box = "vertical",
-			col = 0,
-			row = -2,
-			height = 0.4,
-			width = 0.5,
-			title = "{title}",
-			title_pos = "left",
-			{ win = "input", height = 1, border = "none" },
-			{ win = "list", border = "none" },
-		},
-	}
-	local mini_preview = {
-		hidden = { "preview" },
-		layout = {
-			backdrop = false,
-			width = 0.5,
-			col = 0,
-			row = -2,
-			height = 0.4,
-			box = "vertical",
-			border = "single",
-			title = "{title}",
-			title_pos = "left",
-			{ win = "input", height = 1, border = "bottom" },
-			{
-				box = "horizontal",
-				{ win = "list", border = "none" },
-				{ win = "preview", width = 0.99, border = "none" },
-			},
-		},
-	}
 	add({ "https://github.com/folke/snacks.nvim" })
 	require("snacks").setup({
 		indent = { enabled = true },
 		image = { enabled = true },
 		rename = { enabled = true },
 		bufdelete = { enabled = true },
-		picker = {
-			layout = mini_preview,
-			enabled = true,
-			formatters = { file = { filename_first = true, truncate = "left" } },
-		},
+		picker = { enabled = true },
 	})
 	local Snacks = require("snacks")
 	vim.keymap.set("n", "<Leader>bd", Snacks.bufdelete.delete, { desc = "Delete Buffer" })
@@ -427,3 +384,24 @@ later(function()
 		_99.open()
 	end, { desc = "99 Open" })
 end)
+</FILE_CONTAINING_SELECTION>
+
+</Context>
+<Prompt>
+explain this function to me
+</Prompt>
+
+<Location><File>/Users/brendan.mcdonald/dotfiles/neovim/.config/nvim/plugin/40_plugins.lua</File><Function>range(point(152,1),point(152,74))</Function></Location>
+<FunctionText>	function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)</FunctionText>
+<TEMP_FILE>./tmp/99-5901</TEMP_FILE>
+<MustObey>
+NEVER alter any file other than TEMP_FILE.
+never provide the requested changes as conversational output. Return only the code.
+ONLY provide requested changes by writing the change to TEMP_FILE
+
+never attempt to read TEMP_FILE.
+It is purely for output.
+Previous contents, which may not exist, can be written over without worry
+After writing TEMP_FILE once you should be done.  Be done and end the session.
+
+</MustObey>
