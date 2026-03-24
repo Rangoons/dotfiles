@@ -1,7 +1,6 @@
 ---
 name: code-reviewer
-description: Reviews code changes for quality, correctness, and adherence to PrizePicks conventions. Use
-proactively when creating PRs or when asked to review code.
+description: "Reviews code changes for quality, correctness, and adherence to PrizePicks conventions. Use proactively when creating PRs or when asked to review code."
 tools: Read, Glob, Grep, Bash, Agent
 model: opus
 maxTurns: 40
