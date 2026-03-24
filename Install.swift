@@ -77,6 +77,9 @@ if askUser("Install npm globals?") {
   step("Install npm globals", command: "zsh ./scripts/npm.zsh")
 }
 
+if askUser("Install GH Dash?") {
+  step("Install Dash", command: "gh extension install dlvhdr/gh-dash")
+}
 
 if askUser("Write macOS Defaults?") {
   step("Write macOS Defaults", command: "zsh ./scripts/defaults.zsh")

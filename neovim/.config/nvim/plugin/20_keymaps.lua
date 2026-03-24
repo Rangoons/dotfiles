@@ -2,6 +2,26 @@ local nmap = function(lhs, rhs, desc)
 	-- See `:h vim.keymap.set()`
 	vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
+local mini_preview = {
+	hidden = { "preview" },
+	layout = {
+		backdrop = false,
+		width = 0.5,
+		col = 0,
+		row = -2,
+		height = 0.4,
+		box = "vertical",
+		border = "single",
+		title = "{title}",
+		title_pos = "left",
+		{ win = "input", height = 1, border = "bottom" },
+		{
+			box = "horizontal",
+			{ win = "list", border = "none" },
+			{ win = "preview", width = 0.99, border = "none" },
+		},
+	},
+}
 -- Keymaps ==========================================================================
 Config.leader_group_clues = {
 	{ mode = "n", keys = "<Leader>b", desc = "+Buffer" },
@@ -58,36 +78,43 @@ nmap_leader("la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", "Actions")
 nmap_leader("lM", function()
 	vim.lsp.buf.code_action({ apply = true, context = { only = { "source.addMissingImports.ts" } } })
 end, "Add missing imports")
-nmap_leader("ld", "<Cmd>lua vim.diagnostic.open_float()<CR>", "Diagnostic popup")
+nmap_leader("lk", "<Cmd>lua vim.diagnostic.open_float()<CR>", "Diagnostic popup")
 nmap_leader("lf", '<Cmd>lua require("conform").format()<CR>', "Format")
 nmap_leader("li", "<Cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation")
 nmap_leader("lh", "<Cmd>lua vim.lsp.buf.hover()<CR>", "Hover")
-nmap_leader("lr", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
-nmap_leader("lR", "<Cmd>lua vim.lsp.buf.references()<CR>", "References")
-nmap_leader("ls", "<Cmd>lua vim.lsp.buf.definition()<CR>", "Source definition")
-nmap_leader("lt", "<Cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definition")
+nmap_leader("lR", "<Cmd>lua vim.lsp.buf.rename()<CR>", "Rename")
+nmap_leader("lr", function()
+	Snacks.picker.lsp_references()
+end, "References")
+nmap_leader("ld", function()
+	Snacks.picker.lsp_definitions()
+end, "Definitions")
+nmap_leader("lD", function()
+	Snacks.picker.lsp_declarations()
+end, "Declarations")
+nmap_leader("lI", function()
+	Snacks.picker.lsp_implementations()
+end, "Snacks Implementation")
+nmap_leader("lt", function()
+	Snacks.picker.lsp_type_definitions()
+end, "Type definition")
 nmap_leader("fr", function()
-	Snacks.picker.lsp_references({ layout = "default" })
+	Snacks.picker.lsp_references()
 end, "References")
 nmap_leader("fk", function()
 	Snacks.picker.diagnostics()
 end, "Problems")
 nmap_leader("fu", function()
-	Snacks.picker.undo({ layout = "default" })
+	Snacks.picker.undo()
 end, "undo")
 -- Edit
 local edit_plugin_file = function(filename)
 	return string.format("<Cmd>edit %s/plugin/%s<CR>", vim.fn.stdpath("config"), filename)
 end
-local explore_at_file = "<Cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>"
-local explore_quickfix = function()
-	vim.cmd(vim.fn.getqflist({ winid = true }).winid ~= 0 and "cclose" or "copen")
-end
-local explore_locations = function()
-	vim.cmd(vim.fn.getloclist(0, { winid = true }).winid ~= 0 and "lclose" or "lopen")
-end
 nmap_leader("ed", "<Cmd>lua MiniFiles.open()<CR>", "Directory")
-nmap_leader("ef", explore_at_file, "File directory")
+nmap_leader("ef", function()
+	Snacks.explorer({ layout = "sidebar" })
+end, "File directory")
 nmap_leader("ei", "<Cmd>edit $MYVIMRC<CR>", "init.lua")
 nmap_leader("en", "<Cmd>lua MiniNotify.show_history()<CR>", "Notifications")
 nmap_leader("eq", function()
@@ -101,10 +128,10 @@ nmap_leader("em", edit_plugin_file("mini.lua"), "MINI config")
 nmap_leader("eo", edit_plugin_file("options.lua"), "Options config")
 nmap_leader("ep", edit_plugin_file("plugins.lua"), "Plugins config")
 nmap_leader("/", function()
-	Snacks.picker.grep({ hidden = true, ignored = false, layout = "default" })
+	Snacks.picker.grep({ hidden = true, ignored = false })
 end, "Grep live")
 nmap_leader(" ", function()
-	Snacks.picker.smart()
+	Snacks.picker.smart({ layout = mini_preview })
 end, "Smart Files")
 nmap_leader("f/", '<Cmd>Pick history scope="/"<CR>', '"/" history')
 nmap_leader("f:", '<Cmd>Pick history scope=":"<CR>', '":" history')
@@ -131,7 +158,7 @@ nmap_leader("gg", function()
 	Snacks.picker.git_status()
 end, "Git Changes")
 nmap_leader("gr", function()
-	Snacks.picker.git_diff({ base = "origin/HEAD", layout = "default" })
+	Snacks.picker.git_diff({ base = "origin/HEAD" })
 end, "Git diff")
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

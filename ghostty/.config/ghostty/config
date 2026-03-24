@@ -1,10 +1,11 @@
-theme = Kanagawa Wave
+# theme = Kanagawa Wave
+theme = Melange Dark
 font-size = 18
-font-family = dank mono
+# font-family = dank mono
 font-family = "IosevkaTerm Nerd Font Mono"
-font-feature = -calt
-font-feature = -dlig
-font-feature = -liga
+# font-feature = -calt
+# font-feature = -dlig
+# font-feature = -liga
 window-padding-color = background
 macos-icon = chalkboard
 window-new-tab-position = end
@@ -22,7 +23,7 @@ macos-titlebar-style = transparent
 shell-integration-features = no-cursor,title
 
 title = ""
-
+background-opacity = 0.9
 window-colorspace = display-p3
 window-padding-balance = true
 window-padding-x = 8

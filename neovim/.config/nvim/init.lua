@@ -35,7 +35,6 @@ end
 Config.on_filetype = function(ft, f)
 	misc.safely("filetype:" .. ft, f)
 end
-
 -- Define custom autocommand group and helper to create an autocommand.
 -- Autocommands are Neovim's way to define actions that are executed on events
 -- (like creating a buffer, setting an option, etc.).

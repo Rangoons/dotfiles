@@ -250,50 +250,14 @@ vim.lsp.config("ts_ls", {})
 vim.lsp.config("gopls", {})
 vim.lsp.config("eslint", {})
 later(function()
-	local mini_layout = {
-		preview = "main",
-		layout = {
-			backdrop = false,
-			border = "single",
-			box = "vertical",
-			col = 0,
-			row = -2,
-			height = 0.4,
-			width = 0.5,
-			title = "{title}",
-			title_pos = "left",
-			{ win = "input", height = 1, border = "none" },
-			{ win = "list", border = "none" },
-		},
-	}
-	local mini_preview = {
-		hidden = { "preview" },
-		layout = {
-			backdrop = false,
-			width = 0.5,
-			col = 0,
-			row = -2,
-			height = 0.4,
-			box = "vertical",
-			border = "single",
-			title = "{title}",
-			title_pos = "left",
-			{ win = "input", height = 1, border = "bottom" },
-			{
-				box = "horizontal",
-				{ win = "list", border = "none" },
-				{ win = "preview", width = 0.99, border = "none" },
-			},
-		},
-	}
 	add({ "https://github.com/folke/snacks.nvim" })
 	require("snacks").setup({
+		explorer = { enabled = true },
 		indent = { enabled = true },
 		image = { enabled = true },
 		rename = { enabled = true },
 		bufdelete = { enabled = true },
 		picker = {
-			layout = mini_preview,
 			enabled = true,
 			formatters = { file = { filename_first = true, truncate = "left" } },
 		},
@@ -322,7 +286,7 @@ later(function()
 			save_on_toggle = true,
 		},
 	})
-	nmap("<leader>a", function()
+	nmap("<leader>h", function()
 		harpoon:list():add()
 	end, "Harpoon file")
 	nmap("<C-e>", function()
@@ -343,7 +307,7 @@ later(function()
 		provider = _99.Providers.ClaudeCodeProvider,
 		logger = {
 			level = _99.DEBUG,
-			path = "/tmp/" .. basename .. ".99.debug",
+			path = "~/tmp/" .. basename .. ".99.debug",
 			print_on_error = true,
 		},
 		-- When setting this to something that is not inside the CWD tools
@@ -426,4 +390,57 @@ later(function()
 	vim.keymap.set("n", "<leader>9o", function()
 		_99.open()
 	end, { desc = "99 Open" })
+end)
+later(function()
+	add({ "https://github.com/folke/sidekick.nvim" })
+	local cli = require("sidekick.cli")
+	vim.keymap.set({ "n", "t", "i", "x" }, "<c-.>", function()
+		cli.toggle({ name = "claude", focus = true })
+	end, { desc = "Sidekick Toggle" })
+	vim.keymap.set("n", "<leader>aa", function()
+		cli.toggle({ name = "claude", focus = true })
+	end, { desc = "Sidekick Toggle" })
+	vim.keymap.set("n", "<leader>as", function()
+		cli.select({ filter = { installed = true } })
+	end, { desc = "Select CLI" })
+	vim.keymap.set("n", "<leader>ad", function()
+		cli.close()
+	end, { desc = "Detach a CLI session" })
+	vim.keymap.set("n", "<leader>af", function()
+		cli.send({ msg = "{file}" })
+	end, { desc = "Send File" })
+	vim.keymap.set({ "n", "x", "v" }, "<leader>at", function()
+		cli.send({ msg = "{this}" })
+	end, { desc = "Send This" })
+	vim.keymap.set("x", "<leader>af", function()
+		cli.send({ msg = "{selection}" })
+	end, { desc = "Send Visual Selection" })
+	vim.keymap.set({ "n", "x" }, "<leader>ap", function()
+		cli.prompt()
+	end, { desc = "Select Prompt" })
+end)
+
+local function set_transparent() -- set UI component to transparent
+	local groups = {
+		"Normal",
+		"NormalNC",
+		"EndOfBuffer",
+		"NormalFloat",
+		"FloatBorder",
+		"SignColumn",
+		"StatusLine",
+		"StatusLineNC",
+		"TabLine",
+		"TabLineFill",
+		"TabLineSel",
+		"ColorColumn",
+	}
+	for _, g in ipairs(groups) do
+		vim.api.nvim_set_hl(0, g, { bg = "none" })
+	end
+	vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
+end
+
+now(function()
+	set_transparent()
 end)

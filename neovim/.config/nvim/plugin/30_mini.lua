@@ -213,7 +213,9 @@ later(function()
 		markdown = true,
 	})
 end)
-
+later(function()
+	require("mini.surround").setup()
+end)
 later(function()
 	local miniclue = require("mini.clue")
   -- stylua: ignore
