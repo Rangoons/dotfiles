@@ -87,7 +87,7 @@ if askUser("Write macOS Defaults?") {
 
 
 if askUser("Link Configurations?") {
-  step("Link Configurations", command: "stow ghostty neovim zsh raycast leader-key borders")
+  step("Link Configurations", command: "stow ghostty neovim zsh raycast leader-key borders gh-dash claude")
 }
 
 print("\r")
