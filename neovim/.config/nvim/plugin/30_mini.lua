@@ -94,7 +94,9 @@ now(function()
 		return icon .. " " .. (summary == "" and "-" or summary)
 	end
 end)
-
+now_if_args(function()
+	require("mini.git").setup({})
+end)
 now_if_args(function()
 	-- Enable directory/file preview
 	require("mini.files").setup({

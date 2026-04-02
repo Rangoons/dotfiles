@@ -1,10 +1,7 @@
--- This file contains configuration of 'ts_ls' language server.
+-- ts_ls (TypeScript Language Server)
 -- Source: https://github.com/typescript-language-server/typescript-language-server
---
--- It is used by `:h vim.lsp.enable()` and `:h vim.lsp.config()`.
--- See `:h vim.lsp.Config` and `:h vim.lsp.ClientConfig` for all available fields.
 return {
-	on_attach = function(client, buf_id)
+	on_attach = function(client, _)
 		-- Disable formatting in favor of prettier (via conform.nvim)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
@@ -21,8 +18,6 @@ return {
 			},
 		},
 	},
-	-- eslint and prettier are handled via conform.nvim (eslint_d + prettierd)
-	-- see plugin/plugins.lua conform setup
 	filetypes = {
 		"javascript",
 		"javascriptreact",
