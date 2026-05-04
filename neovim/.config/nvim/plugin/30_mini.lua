@@ -38,28 +38,28 @@ now(function()
 	require("mini.sessions").setup()
 end)
 
-now(function()
-	local linear_output = ""
-	local starter = require("mini.starter")
-	local footer_fn = function()
-		return linear_output
-	end
-	starter.setup({
-		footer = footer_fn,
-	})
-	vim.fn.jobstart("quick-branch list", {
-		stdout_buffered = true,
-		on_stdout = function(_, data)
-			local output = vim.trim(table.concat(data, "\n"))
-			if output ~= "" then
-				linear_output = output
-			end
-			vim.schedule(function()
-				pcall(starter.refresh)
-			end)
-		end,
-	})
-end)
+-- now(function()
+-- 	local linear_output = ""
+-- 	local starter = require("mini.starter")
+-- 	local footer_fn = function()
+-- 		return linear_output
+-- 	end
+-- 	starter.setup({
+-- 		footer = footer_fn,
+-- 	})
+-- 	vim.fn.jobstart("quick-branch list", {
+-- 		stdout_buffered = true,
+-- 		on_stdout = function(_, data)
+-- 			local output = vim.trim(table.concat(data, "\n"))
+-- 			if output ~= "" then
+-- 				linear_output = output
+-- 			end
+-- 			vim.schedule(function()
+-- 				pcall(starter.refresh)
+-- 			end)
+-- 		end,
+-- 	})
+-- end)
 now(function()
 	local function format_branch(str)
 		if str == "" or str == nil then
