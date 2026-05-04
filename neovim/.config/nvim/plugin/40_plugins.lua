@@ -2,7 +2,7 @@ local now, now_if_args, later, on_packchanged = Config.now, Config.now_if_args, 
 local add = vim.pack.add
 now(function()
 	add({ "https://github.com/savq/melange-nvim", "https://github.com/rose-pine/neovim" })
-	vim.cmd("colorscheme melange")
+	-- vim.cmd("colorscheme melange")
 end)
 now(function()
 	add({ "https://github.com/rebelot/kanagawa.nvim", "https://github.com/yorickpeterse/vim-paper" })
@@ -17,6 +17,7 @@ now(function()
 			},
 		},
 	})
+	vim.cmd("colorscheme kanagawa")
 end)
 now_if_args(function()
 	local ts_update = function()

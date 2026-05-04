@@ -22,7 +22,7 @@
     },
     "gitsigns.nvim": {
       "rev": "7c4faa3540d0781a28588cafbd4dd187a28ac6e3",
-      "src": "https://www.github.com/lewis6991/gitsigns.nvim"
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "harpoon": {
       "rev": "87b1a3542499ff576da5b06cbfd1dbbece2e4884",
@@ -43,7 +43,7 @@
     },
     "mini.nvim": {
       "rev": "9990c41f10f54f29a888d13024c9f765037bde23",
-      "src": "https://www.github.com/echasnovski/mini.nvim"
+      "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neovim": {
       "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
@@ -55,7 +55,7 @@
     },
     "nvim-lspconfig": {
       "rev": "0203a9608d63eda57679b01e69f33a7b4c34b0d1",
-      "src": "https://www.github.com/neovim/nvim-lspconfig"
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
       "rev": "493890b87a81dfe6a7e577dbc364ae33fa482da9",

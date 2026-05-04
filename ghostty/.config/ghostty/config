@@ -1,8 +1,8 @@
-# theme = Kanagawa Wave
-theme = Melange Dark
-font-size = 18
-# font-family = dank mono
-font-family = "IosevkaTerm Nerd Font Mono"
+theme = Kanagawa Wave
+# theme = Melange Dark
+font-size = 20
+font-family = dank mono
+# font-family = "IosevkaTerm Nerd Font Mono"
 # font-feature = -calt
 # font-feature = -dlig
 # font-feature = -liga
